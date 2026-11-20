@@ -74,12 +74,20 @@ h2[data-split],.s-def__word{font-family:var(--f-title);font-weight:900;text-tran
   background:radial-gradient(90% 70% at 50% 40%, #B21236 0%, var(--h-bg) 55%, var(--h-bg2) 100%);
   transition:background .5s;
 }
-.s-hero--model.is-light{--h-bg:#EFEFE3; --h-bg2:#E7E4D2; --h-ink:#60150D; --h-muted:rgba(96,21,13,.55); --h-line:rgba(96,21,13,.42); --h-pill:rgba(255,255,255,.35);
-  background:radial-gradient(120% 90% at 50% 42%, #fff 0%, var(--h-bg) 55%, var(--h-bg2) 100%)}
-.s-hero--model::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+.s-hero--model.is-light{--h-bg:#FBEED3; --h-bg2:#F3D3A0; --h-ink:#60150D; --h-muted:rgba(96,21,13,.55); --h-line:rgba(96,21,13,.42); --h-pill:rgba(255,255,255,.35);
+  background:
+    radial-gradient(60% 50% at 85% 0%, rgba(254,137,38,.25), rgba(254,137,38,0) 60%),
+    radial-gradient(60% 50% at 10% 100%, rgba(178,18,54,.12), rgba(178,18,54,0) 60%),
+    radial-gradient(120% 90% at 50% 42%, #FFF6E0 0%, var(--h-bg) 55%, var(--h-bg2) 100%)}
+.s-hero--model::before{content:"";position:absolute;inset:-25%;z-index:0;pointer-events:none;
   background:radial-gradient(42% 34% at 50% 44%, rgba(254,185,20,.38), rgba(254,185,20,0) 70%);
   animation:glowdrift 9s ease-in-out infinite alternate}
-.s-hero--model.is-light::before{background:radial-gradient(42% 34% at 50% 44%, rgba(254,185,20,.28), rgba(254,185,20,0) 70%)}
+.s-hero--model.is-light::before{
+  background:
+    radial-gradient(30% 24% at 50% 44%, rgba(254,185,20,.32), rgba(254,185,20,0) 70%),
+    repeating-conic-gradient(from 0deg at 50% 44%, rgba(254,137,38,.08) 0deg 6deg, rgba(254,137,38,0) 6deg 12deg);
+  transform-origin:50% 44%; animation:rayspin 140s linear infinite}
+@keyframes rayspin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes glowdrift{from{transform:translate(-2.5%,-1.5%) scale(1)}to{transform:translate(2.5%,2%) scale(1.12)}}
 .s-hero--model::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;z-index:1;
   background-image:radial-gradient(rgba(239,239,227,.13) 1px, transparent 1px);background-size:9px 9px;mix-blend-mode:screen}
