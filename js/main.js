@@ -81,7 +81,7 @@ var intro=$('[data-intro]');
 function heroIntro(){
   gsap.from('.s-hero__headline h1',{y:60,opacity:0,stagger:0.12,duration:1,ease:'expo.out',delay:0.1});
   gsap.from('.s-hero__headline p',{y:30,opacity:0,duration:0.9,ease:'expo.out',delay:0.35});
-  gsap.from('.s-hero__controls, .s-hero__theme',{y:-24,opacity:0,stagger:0.08,duration:0.8,ease:'expo.out',delay:0.25,clearProps:'opacity'});
+  gsap.from('.s-hero__theme',{y:-24,opacity:0,duration:0.8,ease:'expo.out',delay:0.25,clearProps:'opacity'});
   gsap.from('.s-hero__note, .s-hero__badge',{opacity:0,duration:1,ease:'expo.out',delay:0.5,clearProps:'opacity'});
   gsap.from('.topbar > *',{y:-60,opacity:0,stagger:0.08,duration:0.9,ease:'expo.out',delay:0.4,clearProps:'opacity'});
 }
@@ -182,11 +182,7 @@ if(!reduced){
 /* ---------- hero scroll-out ---------- */
 var hero=$('.s-hero');
 if(hero && !reduced){
-  gsap.to('.s-hero__headline, .s-hero__note, .s-hero__controls, .s-hero__theme, .s-hero__badge',{opacity:0,y:-40,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'45% top',scrub:true}});
-  /* topbar badge velocity */
-  var badge=$('.topbar__logo');
-  if(badge){ var rot=gsap.quickTo(badge,'rotation',{duration:0.6,ease:'power3'});
-    ScrollTrigger.create({onUpdate:function(s){ rot(gsap.utils.clamp(-20,20,s.getVelocity()/120)); }}); }
+  gsap.to('.s-hero__headline, .s-hero__note, .s-hero__theme, .s-hero__badge',{opacity:0,y:-40,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'45% top',scrub:true}});
 }
 
 /* ---------- marquees (velocity boost) ---------- */

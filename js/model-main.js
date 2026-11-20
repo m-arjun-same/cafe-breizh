@@ -1,7 +1,8 @@
 /* Café Breizh — hero: ONE real 3D croissant (GLB mesh, Three.js).
    Same engine as the approved hero sample, scoped to the main page's
-   hero section. No particles. Controls: Pulse, Pause/Play spin,
-   Light/Dark (hero only), drag to turn, gentle mouse parallax. */
+   hero section. No particles. Auto-spin with entrance grow-in,
+   rocking and breathing; Light/Dark toggle (hero only), drag to
+   turn, gentle mouse parallax. */
 import * as THREE from 'three';
 import { GLTFLoader } from '../assets/vendor/three/GLTFLoader.js';
 import { RoomEnvironment } from '../assets/vendor/three/RoomEnvironment.js';
@@ -48,36 +49,25 @@ loader.load('assets/models/croissant.glb', function (gltf) {
 }, undefined, function () { section.classList.add('no-gl'); });
 
 /* soft contact shadow */
+var shadowBase = 0.30;
 var shadow = new THREE.Mesh(
   new THREE.CircleGeometry(1.05, 40),
-  new THREE.MeshBasicMaterial({ color: 0x60150d, transparent: true, opacity: 0.10, depthWrite: false })
+  new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: shadowBase, depthWrite: false })
 );
 shadow.rotation.x = -Math.PI / 2;
 shadow.position.y = -0.88;
 shadow.scale.set(1.25, 1, 1);
 scene.add(shadow);
 
-/* state + controls */
-var spinning = true, pulseT = -1, velY = 0, targetRX = 0.32, dragging = false, lastX = 0, lastY = 0;
+/* state + theme toggle (spin/pulse pills removed at Dinesh's order) */
+var velY = 0, targetRX = 0.32, dragging = false, lastX = 0, lastY = 0;
 var parX = 0, parY = 0;
 holder.rotation.x = targetRX;
 
-var pauseBtn = document.querySelector('[data-hero-pause]');
-var playBtn = document.querySelector('[data-hero-play]');
-pauseBtn.addEventListener('click', function () { spinning = false; syncSpin(); });
-playBtn.addEventListener('click', function () { spinning = true; syncSpin(); });
-function syncSpin() {
-  pauseBtn.classList.toggle('is-off', !spinning);
-  playBtn.classList.toggle('is-off', spinning);
-  if (window.innerWidth <= 760) {
-    pauseBtn.innerHTML = spinning ? 'Pause Spin ❚❚' : 'Play Spin ▷';
-    pauseBtn.classList.toggle('is-off', false);
-    pauseBtn.onclick = function () { spinning = !spinning; syncSpin(); };
-  }
-}
-document.querySelector('[data-hero-pulse]').addEventListener('click', function () { pulseT = 0; });
 document.querySelector('[data-hero-theme]').addEventListener('click', function () {
-  section.classList.toggle('is-dark');
+  var light = section.classList.toggle('is-light');
+  shadowBase = light ? 0.10 : 0.30;
+  shadow.material.color.set(light ? 0x60150d : 0x000000);
 });
 
 canvas.addEventListener('pointerdown', function (e) { dragging = true; lastX = e.clientX; lastY = e.clientY; });
@@ -110,32 +100,29 @@ function resize() {
 }
 window.addEventListener('resize', resize);
 resize();
-syncSpin();
 
 /* render only while the hero is on screen */
 var visible = true;
 new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(section);
 
 var clock = new THREE.Clock();
+var introT = 0;
 (function tick() {
   requestAnimationFrame(tick);
   if (!visible) return;
   var t = clock.getElapsedTime();
+  if (introT < 1) introT = Math.min(1, introT + 0.011);
+  var e = 1 - Math.pow(1 - introT, 3); /* ease-out entrance */
   if (!dragging) {
-    if (spinning) holder.rotation.y += 0.005 + velY;
+    holder.rotation.y += 0.005 + velY + (1 - e) * 0.045;
     velY *= 0.95;
   }
+  var sc = fit * (0.55 + 0.45 * e) * (1 + Math.sin(t * 1.3) * 0.012); /* grow-in + breathing */
+  holder.scale.set(sc, sc, sc);
   holder.rotation.x += (targetRX - holder.rotation.x) * 0.06 + parY * 0.0006;
-  holder.rotation.z = parX * -0.03;
-  holder.position.y = Math.sin(t * 1.1) * 0.07;
+  holder.rotation.z = Math.sin(t * 0.7) * 0.045 + parX * -0.03; /* gentle rocking */
+  holder.position.y = Math.sin(t * 1.1) * 0.07 - (1 - e) * 0.35;
   holder.position.x = parX * 0.08;
-  if (pulseT >= 0) {
-    pulseT += 0.045;
-    var k = Math.sin(Math.min(pulseT, 1) * Math.PI);
-    holder.scale.y = fit * (1 - k * 0.13);
-    holder.scale.x = holder.scale.z = fit * (1 + k * 0.07);
-    if (pulseT >= 1) { pulseT = -1; holder.scale.setScalar(fit); }
-  }
-  shadow.material.opacity = 0.10 + Math.sin(t * 1.1) * 0.018;
+  shadow.material.opacity = shadowBase + Math.sin(t * 1.1) * 0.018;
   renderer.render(scene, camera);
 })();
