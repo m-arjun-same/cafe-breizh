@@ -47,13 +47,6 @@
 
   .note-l{position:absolute; left:36px; top:37%; z-index:4; font-size:16px; line-height:1.45; color:var(--muted)}
   .note-r{position:absolute; right:36px; top:33%; z-index:4; text-align:right; font-size:13px; letter-spacing:.18em; line-height:1.7; color:var(--muted); text-transform:uppercase}
-  .forms{position:absolute; right:36px; top:43%; z-index:5; display:flex; flex-direction:column; align-items:flex-end; gap:10px}
-  .forms button{
-    font:inherit; font-size:16.5px; color:var(--ink); background:none; border:1px solid transparent;
-    border-radius:99px; padding:6px 15px; margin-right:-15px; cursor:pointer;
-  }
-  .forms button:hover{color:#B21236}
-  .forms button.is-active{border-color:var(--line); background:var(--pill)}
 
   .headline{position:absolute; left:36px; bottom:34px; z-index:4}
   .headline h1{font-family:Archivo,sans-serif; font-weight:900; font-size:clamp(58px,9.2vw,148px); line-height:.94; letter-spacing:-.015em}
@@ -74,8 +67,6 @@
     .controls [data-play]{display:none}
     .theme{display:none}
     .note-l,.note-r{display:none}
-    .forms{right:18px; top:26%; gap:9px}
-    .forms button{font-size:14px; padding:5px 11px; margin-right:-11px}
     .headline{left:18px; bottom:78px}
     .headline h1{font-size:56px}
     .headline p{display:none}
@@ -105,32 +96,19 @@
   <p class="sample-tag">Sample — hero concept</p>
 
   <p class="note-l">Move to shape.<br>Press to resonate.</p>
-  <p class="note-r">Ten pastries.<br>Endless expression.</p>
-
-  <nav class="forms" aria-label="Pastries">
-    <button data-form class="is-active">Croissant</button>
-    <button data-form>Baguette</button>
-    <button data-form>Eclair</button>
-    <button data-form>Macaron</button>
-    <button data-form>Lemon Tart</button>
-    <button data-form>Madeleine</button>
-    <button data-form>Brioche</button>
-    <button data-form>Galette</button>
-    <button data-form>Mille-Feuille</button>
-    <button data-form>Chouquette</button>
-  </nav>
+  <p class="note-r">One croissant.<br>Endless expression.</p>
 
   <div class="headline">
     <h1>Golden.</h1>
     <div class="row">
       <h1>Alive.</h1>
-      <p>Ten thousand golden crumbs.<br>One living pastry.</p>
+      <p>Twenty thousand crumbs.<br>One real croissant.</p>
     </div>
   </div>
 
   <p class="badge"><i></i> Made in-house · Café Breizh</p>
 </div>
 
-<script src="js/cymatic.js"></script>
+<script src="js/croissant.js"></script>
 </body>
 </html>
