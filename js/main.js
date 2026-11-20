@@ -23,7 +23,7 @@ function paintStatus(){
   if(!dot||!txt) return;
   var any=s.sm||s.hd;
   dot.classList.toggle('is-open',any);
-  txt.textContent = s.sm&&s.hd ? 'Ouvert — les 2 adresses' : s.sm ? 'Ouvert — Spring Mountain' : s.hd ? 'Ouvert — Henderson' : 'Fermé — dès 7h00 demain';
+  txt.textContent = s.sm&&s.hd ? 'Open — both locations' : s.sm ? 'Open — Spring Mountain' : s.hd ? 'Open — Henderson' : 'Closed — opens 7 AM tomorrow';
 }
 paintStatus(); setInterval(paintStatus,60000);
 
@@ -94,7 +94,7 @@ function runIntro(){
   var word=$('[data-intro-word]');
   var letters=word.textContent.split(''); word.textContent='';
   var spans=letters.map(function(c){var s=document.createElement('span');s.className='ch';s.textContent=c;word.appendChild(s);return s});
-  var msgs=['On préchauffe le four…','On plie la pâte…','Beurre d\u2019Isigny, promis…','Ça dore…'];
+  var msgs=['Preheating the oven…','Folding the dough…','Isigny butter, promise…','Turning golden…'];
   var mi=0, msgEl=$('[data-intro-msg]');
   var msgTimer=setInterval(function(){ mi=(mi+1)%msgs.length; if(msgEl) msgEl.textContent=msgs[mi]; },650);
   var bar=$('[data-intro-bar]'), prog={v:0.04};
@@ -135,7 +135,7 @@ if(matchMedia('(pointer: fine) and (hover: hover)').matches && !reduced){
     document.addEventListener('pointerover',function(e){
       var t=e.target.closest('a, button, [data-cursor-text]');
       cursor.classList.toggle('is-hover',!!t);
-      if(label) label.textContent = t ? (t.dataset.cursorText||'Bonjour!') : '';
+      if(label) label.textContent = t ? (t.dataset.cursorText||'Hello!') : '';
     });
   }
   $$('[data-magnetic]').forEach(function(el){

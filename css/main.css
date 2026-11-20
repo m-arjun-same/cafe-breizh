@@ -235,7 +235,7 @@ h2[data-split],.s-def__word{font-family:var(--f-title);font-weight:900;text-tran
   :root{--topbar-h:68px}
   .topbar__links{display:none}
   .topbar__status{font-size:13px;padding:8px 12px}
-  .topbar__status span:last-child{max-width:52vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar__status span:last-child{max-width:60vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .s-hero__stamp{top:238px;bottom:auto;right:8px;width:78px}
   .s-hero__stack{width:min(76vw,420px)}
   .layer{width:min(64vw,300px)}
