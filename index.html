@@ -42,22 +42,25 @@
 </header>
 
 <main>
-<!-- HERO -->
-<section class="s-hero">
-  <div class="s-hero__motif" aria-hidden="true">BREIZH · HELLO · BREIZH · HELLO ·</div>
-  <div class="s-hero__kicker"><span>Bakery &amp; Pastry by Chef Pierre Gatel</span><span class="s-hero__by">· Las Vegas</span></div>
-  <h1 class="s-hero__title" data-hero-title>BREIZH</h1>
-  <div class="s-hero__stack" data-hero-stack>
-    <img class="stack__back" src="assets/img/ig-croissant.jpg" alt="Golden croissant" data-depth="14">
-    <img class="stack__main" src="assets/img/ig-hero-minis.jpg" alt="Plate of mini croissants and chocolate rolls" data-depth="26">
-    <img class="stack__front" src="assets/img/ig-eclairs.jpg" alt="Eclairs" data-depth="44">
+<!-- HERO — one real 3D croissant (approved sample, hero section only) -->
+<section class="s-hero s-hero--model">
+  <canvas class="s-hero__gl" data-hero-gl aria-hidden="true"></canvas>
+  <div class="s-hero__controls">
+    <button class="pill" data-hero-pulse type="button">Pulse ∿</button>
+    <button class="pill" data-hero-pause type="button">Pause Spin ❚❚</button>
+    <button class="pill is-off" data-hero-play type="button">Play Spin ▷</button>
   </div>
-  <div class="s-hero__stamp" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><path id="stampc" d="M50 10a40 40 0 1 1 0 80 40 40 0 1 1 0-80"/></defs><circle cx="50" cy="50" r="49" fill="#FEB914"/><text font-size="11" fill="#60150D" letter-spacing="2.5"><textPath href="#stampc">MADE IN-HOUSE · SINCE 2016 · LAS VEGAS ·</textPath></text><text x="50" y="58" text-anchor="middle" font-size="20">🥐</text></svg></div>
-  <div class="s-hero__foot">
-    <p class="s-hero__tagline">Everything made from scratch, baked on site daily.</p>
-    <p class="s-hero__hours">Spring Mountain · Henderson — from 7:00 AM</p>
+  <button class="pill s-hero__theme" data-hero-theme type="button">◐&nbsp; Light / Dark</button>
+  <p class="s-hero__note s-hero__note--l">Move to shape.<br>Press to resonate.</p>
+  <p class="s-hero__note s-hero__note--r">One croissant.<br>Endless expression.</p>
+  <div class="s-hero__headline">
+    <h1>Golden.</h1>
+    <div class="s-hero__row">
+      <h1>Alive.</h1>
+      <p>One real croissant — a true 3D bake, no particles. Everything made from scratch, baked on site daily.</p>
+    </div>
   </div>
-  <p class="s-hero__scroll">Scroll <i></i></p>
+  <p class="s-hero__badge"><i></i> Made in-house · Café Breizh</p>
 </section>
 
 <!-- MARQUEE -->
@@ -213,5 +216,9 @@
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
 <script src="js/main.js"></script>
+<script type="importmap">
+{ "imports": { "three": "./assets/vendor/three/three.module.js" } }
+</script>
+<script type="module" src="js/model-main.js"></script>
 </body>
 </html>
