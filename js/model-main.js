@@ -49,10 +49,10 @@ loader.load('assets/models/croissant.glb', function (gltf) {
 }, undefined, function () { section.classList.add('no-gl'); });
 
 /* soft contact shadow */
-var shadowBase = 0.30;
+var shadowBase = 0.10;
 var shadow = new THREE.Mesh(
   new THREE.CircleGeometry(1.05, 40),
-  new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: shadowBase, depthWrite: false })
+  new THREE.MeshBasicMaterial({ color: 0x60150d, transparent: true, opacity: shadowBase, depthWrite: false })
 );
 shadow.rotation.x = -Math.PI / 2;
 shadow.position.y = -0.88;
@@ -65,9 +65,9 @@ var parX = 0, parY = 0;
 holder.rotation.x = targetRX;
 
 document.querySelector('[data-hero-theme]').addEventListener('click', function () {
-  var light = section.classList.toggle('is-light');
-  shadowBase = light ? 0.10 : 0.30;
-  shadow.material.color.set(light ? 0x60150d : 0x000000);
+  var dark = section.classList.toggle('is-dark');
+  shadowBase = dark ? 0.30 : 0.10;
+  shadow.material.color.set(dark ? 0x000000 : 0x60150d);
 });
 
 canvas.addEventListener('pointerdown', function (e) { dragging = true; lastX = e.clientX; lastY = e.clientY; });
