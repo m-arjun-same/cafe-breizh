@@ -102,13 +102,16 @@
     <h1>Golden.</h1>
     <div class="row">
       <h1>Alive.</h1>
-      <p>Twenty thousand crumbs.<br>One real croissant.</p>
+      <p>One real croissant.<br>A true 3D bake, no particles.</p>
     </div>
   </div>
 
   <p class="badge"><i></i> Made in-house · Café Breizh</p>
 </div>
 
-<script src="js/croissant.js"></script>
+<script type="importmap">
+{ "imports": { "three": "./assets/vendor/three/three.module.js" } }
+</script>
+<script type="module" src="js/model.js"></script>
 </body>
 </html>
